@@ -11,7 +11,7 @@ class Me(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.width, self.height = width, height
         self.show_name = "我"
-        self.image = tti(30, self.show_name)
+        self.image = tti(20, self.show_name)
         self.rect = self.image.get_rect()
         self.rect.center = (self.width // 2, self.height // 2)
         self.index = 0
@@ -52,6 +52,14 @@ class Building(pygame.sprite.Sprite):
         self.name = name
 
 class Road(Building):
-    def __init__(self, name, x, y):
+    def __init__(self, name, x, y, color=(255, 0, 0)):
         super().__init__(name, x, y)
-        self.image = tti(20, name, (255, 0, 0))
+        self.image = tti(20, name, color)
+
+class Street:
+    def __init__(self, name, x, y):
+        self.image = []
+        self.dict = {}
+        for i, j in zip(name, range(len(name))):
+            self.image.append(Road(i, x, y + j * 20, (0, 0, 255)))
+            self.dict[i] = (x + j * 20, y + j * 20)
