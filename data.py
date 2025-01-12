@@ -1,9 +1,9 @@
 import pygame
 from pygame.locals import *
 
-def tti(size, text):
+def tti(size, text, color=(0, 0, 0)):
     font = pygame.font.Font("./data/Microsoft YH.ttc", size)
-    image = font.render(text, True, (0, 0, 0))
+    image = font.render(text, True, color)
     return image
 
 class Me(pygame.sprite.Sprite):
@@ -50,3 +50,8 @@ class Building(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = x, y
         self.name = name
+
+class Road(Building):
+    def __init__(self, name, x, y):
+        super().__init__(name, x, y)
+        self.image = tti(20, name, (255, 0, 0))
